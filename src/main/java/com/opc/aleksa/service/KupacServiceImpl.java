@@ -19,4 +19,16 @@ public class KupacServiceImpl implements KupacService {
     public List<Kupac> getKupci() {
         return kupacRepository.findAll();
     }
+
+    @Override
+    public List<Kupac> getUpdatedKupci() {
+        List<Kupac> kupci = kupacRepository.findAll();
+        kupci.stream()
+                .forEach(kupac -> kupac.getKartice()
+                        .stream().forEach(kartica -> {
+                            if (!kartica.getDozvoljeniGradovi().contains(kupac.getGrad()))
+                                kartica.getDozvoljeniGradovi().add(kupac.getGrad());
+        }));
+        return kupacRepository.saveAll(kupci);
+    }
 }

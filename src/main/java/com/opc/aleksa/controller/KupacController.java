@@ -22,4 +22,9 @@ public class KupacController {
     public List<Kupac> getAll(){
         return this.kupacService.getKupci();
     }
+
+    @GetMapping("updateKartice")
+    public List<Kupac> getUpdatedKupci(){
+        return kupacService.getUpdatedKupci();
+    }
 }

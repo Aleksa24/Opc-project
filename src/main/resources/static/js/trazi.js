@@ -2,7 +2,7 @@ function trazi(){
     $.get("http://localhost:8080/kupac/all", function(kupci, status){
 
         if (status !== 'success'){
-            alert("error in getting kupci");
+            alert("greska pri trazenju kupaca od servera");
             return;
         }
         var table = document.getElementById("table")
@@ -15,9 +15,6 @@ function trazi(){
             addRow(table,kupac)
         }
     });
-}
-function akcija(){
-    alert('akcija')
 }
 function isprazniTabelu() {
     let table = document.getElementById("table");

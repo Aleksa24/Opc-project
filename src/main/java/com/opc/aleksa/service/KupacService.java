@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface KupacService {
     List<Kupac> getKupci();
+
+    List<Kupac> getUpdatedKupci();
 }
