@@ -20,8 +20,8 @@ public class NavigationController {
     @GetMapping("/home")
     public String home(Model model){
 
-//        model.addAttribute("kupci",new ArrayList<Kupac>());
-        model.addAttribute("kupci",kupacService.getKupci());
+        model.addAttribute("kupci",new ArrayList<Kupac>());
+//        model.addAttribute("kupci",kupacService.getKupci());
 
         return "home";
     }

@@ -46,24 +46,26 @@ function ubaciDozvoljeneGradove(ul_tag, dozvoljeniGradovi) {
     }
 }
 function izbaciNeaktivneKupce(){
-    setTimeout(()=> {},1000);
-    try {
-        var table = document.getElementById("table");
-        var rowCount = table.rows.length;
+    setTimeout(()=> {
+        try {
+            var table = document.getElementById("table");
+            var rowCount = table.rows.length;
 
-        for(var i=1; i<rowCount; i++) {
-            var row = table.rows[i];
-            var checkbox = row.cells[3].childNodes[0].childNodes[0];
+            for(var i=1; i<rowCount; i++) {
+                var row = table.rows[i];
+                var checkbox = row.cells[3].childNodes[0].childNodes[0];
 
-            if (checkbox.checked === false){
-                table.deleteRow(i);
-                rowCount--;
-                i--;
+                if (checkbox.checked === false){
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
             }
+        }catch(e) {
+            alert(e);
         }
-    }catch(e) {
-        alert(e);
-    }
+    },1000);
+
 }
 function azurirajKarticeKupaca(){
     $.get("http://localhost:8080/kupac/updateKartice", function(kupci, status){
