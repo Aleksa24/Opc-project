@@ -16,6 +16,10 @@ function trazi(){
         }
     });
 }
+function akcija(){
+    azurirajKarticeKupaca();
+    izbaciNeaktivneKupce();
+}
 function isprazniTabelu() {
     let table = document.getElementById("table");
     let rowCount = table.rows.length;
@@ -26,6 +30,56 @@ function isprazniTabelu() {
         i--;
     }
 
+}
+
+function izdvojDozvoljeneGradove(kupac){
+    let dozvoljeniGradovi = [];
+    kupac.kartice.forEach(kartica => kartica.dozvoljeniGradovi.forEach(grad => dozvoljeniGradovi.push(grad)));
+
+    return [...new Set(dozvoljeniGradovi.map(grad => grad.naziv))];
+}
+function ubaciDozvoljeneGradove(ul_tag, dozvoljeniGradovi) {
+    for (let grad of dozvoljeniGradovi) {
+        let li_tag = document.createElement("li");
+        li_tag.innerText = grad;
+        ul_tag.appendChild(li_tag);
+    }
+}
+function izbaciNeaktivneKupce(){
+    setTimeout(()=> {},1000);
+    try {
+        var table = document.getElementById("table");
+        var rowCount = table.rows.length;
+
+        for(var i=1; i<rowCount; i++) {
+            var row = table.rows[i];
+            var checkbox = row.cells[3].childNodes[0].childNodes[0];
+
+            if (checkbox.checked === false){
+                table.deleteRow(i);
+                rowCount--;
+                i--;
+            }
+        }
+    }catch(e) {
+        alert(e);
+    }
+}
+function azurirajKarticeKupaca(){
+    $.get("http://localhost:8080/kupac/updateKartice", function(kupci, status){
+        if (status !== 'success'){
+            alert("gresja pri azuriranju kartica na serveru")
+        }
+        var table = document.getElementById("table")
+
+        //brisanje prethodnih podataka
+        isprazniTabelu();
+
+        //dodavenje elemenata u tabelu
+        for (let kupac of kupci) {
+            addRow(table,kupac)
+        }
+    });
 }
 function addRow(table,kupac) {
     var rowCount = table.rows.length;
@@ -74,18 +128,4 @@ function addRow(table,kupac) {
     ubaciDozvoljeneGradove(ul_tag,dozvoljeniGradovi);
     element_dozvoljeniGradovi.appendChild(ul_tag);
     cell_dozvoljeniGradovi.appendChild(element_dozvoljeniGradovi);
-}
-
-function izdvojDozvoljeneGradove(kupac){
-    let dozvoljeniGradovi = [];
-    kupac.kartice.forEach(kartica => kartica.dozvoljeniGradovi.forEach(grad => dozvoljeniGradovi.push(grad)));
-
-    return [...new Set(dozvoljeniGradovi.map(grad => grad.naziv))];
-}
-function ubaciDozvoljeneGradove(ul_tag, dozvoljeniGradovi) {
-    for (let grad of dozvoljeniGradovi) {
-        let li_tag = document.createElement("li");
-        li_tag.innerText = grad;
-        ul_tag.appendChild(li_tag);
-    }
 }

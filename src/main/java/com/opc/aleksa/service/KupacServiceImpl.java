@@ -23,11 +23,10 @@ public class KupacServiceImpl implements KupacService {
     @Override
     public List<Kupac> getUpdatedKupci() {
         List<Kupac> kupci = kupacRepository.findAll();
-        kupci.stream()
-                .forEach(kupac -> kupac.getKartice()
-                        .stream().forEach(kartica -> {
-                            if (!kartica.getDozvoljeniGradovi().contains(kupac.getGrad()))
-                                kartica.getDozvoljeniGradovi().add(kupac.getGrad());
+        kupci.forEach(kupac -> kupac.getKartice()
+                .forEach(kartica -> {
+                    if (!kartica.getDozvoljeniGradovi().contains(kupac.getGrad()))
+                        kartica.getDozvoljeniGradovi().add(kupac.getGrad());
         }));
         return kupacRepository.saveAll(kupci);
     }
