@@ -59,8 +59,27 @@ function addRow(table,kupac) {
     element_UBK.innerText = kupac.kartice.length;
     cell_UBK.appendChild(element_UBK);
 
+
+    ///////
     var cell_dozvoljeniGradovi = row.insertCell(5);
     var element_dozvoljeniGradovi = document.createElement("tr");
-    element_dozvoljeniGradovi.name=kupac.id;
+    var dozvoljeniGradovi = izdvojDozvoljeneGradove(kupac);
+    var ul_tag = document.createElement("ul");
+    ubaciDozvoljeneGradove(ul_tag,dozvoljeniGradovi);
+    element_dozvoljeniGradovi.appendChild(ul_tag);
     cell_dozvoljeniGradovi.appendChild(element_dozvoljeniGradovi);
+}
+
+function izdvojDozvoljeneGradove(kupac){
+    let dozvoljeniGradovi = [];
+    kupac.kartice.forEach(kartica => kartica.dozvoljeniGradovi.forEach(grad => dozvoljeniGradovi.push(grad)));
+
+    return [...new Set(dozvoljeniGradovi.map(grad => grad.naziv))];
+}
+function ubaciDozvoljeneGradove(ul_tag, dozvoljeniGradovi) {
+    for (let grad of dozvoljeniGradovi) {
+        let li_tag = document.createElement("li");
+        li_tag.innerText = grad;
+        ul_tag.appendChild(li_tag);
+    }
 }
