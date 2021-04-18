@@ -1,0 +1,22 @@
+.main-table{
+    margin-left: 100px;
+    margin-top: 30px;
+    margin-right: 400px;
+    width: auto;
+}
+.main-column{
+    width: 50px;
+}
+table{
+    border: 1px solid black;
+    width: 1000px;
+}
+table tr{
+    width: 50px;
+}
+.btn-position{
+    padding: 3px;
+    margin-left: 100px;
+    margin-top: 50px;
+    width: 80px;
+}
