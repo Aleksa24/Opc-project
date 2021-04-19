@@ -18,7 +18,6 @@ function trazi(){
 }
 function akcija(){
     azurirajKarticeKupaca();
-    izbaciNeaktivneKupce();
 }
 function isprazniTabelu() {
     let table = document.getElementById("table");
@@ -81,6 +80,7 @@ function azurirajKarticeKupaca(){
         for (let kupac of kupci) {
             addRow(table,kupac)
         }
+        izbaciNeaktivneKupce();
     });
 }
 function addRow(table,kupac) {
