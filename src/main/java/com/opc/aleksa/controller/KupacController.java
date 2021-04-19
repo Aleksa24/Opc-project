@@ -1,6 +1,6 @@
 package com.opc.aleksa.controller;
 
-import com.opc.aleksa.model.Kupac;
+import com.opc.aleksa.dto.KupacDto;
 import com.opc.aleksa.service.KupacService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +19,12 @@ public class KupacController {
     }
 
     @GetMapping("all")
-    public List<Kupac> getAll(){
+    public List<KupacDto> getAll(){
         return this.kupacService.getKupci();
     }
 
     @GetMapping("updateKartice")
-    public List<Kupac> getUpdatedKupci(){
+    public List<KupacDto> getUpdatedKupci(){
         return kupacService.getUpdatedKupci();
     }
 }

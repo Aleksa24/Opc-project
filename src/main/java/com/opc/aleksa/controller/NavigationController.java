@@ -1,5 +1,6 @@
 package com.opc.aleksa.controller;
 
+import com.opc.aleksa.dto.KupacDto;
 import com.opc.aleksa.model.Kupac;
 import com.opc.aleksa.service.KupacService;
 import org.springframework.stereotype.Controller;
@@ -20,8 +21,8 @@ public class NavigationController {
     @GetMapping("/home")
     public String home(Model model){
 
-        model.addAttribute("kupci",new ArrayList<Kupac>());
-//        model.addAttribute("kupci",kupacService.getKupci());
+//        model.addAttribute("kupci",new ArrayList<KupacDto>());
+        model.addAttribute("kupci",kupacService.getKupci());
 
         return "home";
     }
